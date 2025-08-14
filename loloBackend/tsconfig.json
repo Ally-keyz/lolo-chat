@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "strict": true, // Recommended for type safety
+    "skipLibCheck": true, // Recommended to avoid issues with third-party types
+    "forceConsistentCasingInFileNames": true, // Recommended for cross-platform consistency
+    "outDir": "./dist" // Specify your output directory
+  },
+  "include": [
+    "./**/*.ts" // Adjust based on your source file location
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
