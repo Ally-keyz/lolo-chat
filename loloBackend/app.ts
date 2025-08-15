@@ -33,13 +33,9 @@ io.on("connection" ,(socket) =>{
      console.log("History saved!!")
      io.emit("sent msg",msg)
     })
-    socket.on("disconect",()=>{
+    socket.on("disconnect",()=>{
         console.log('socket sever disconected');
     });
-
-    socket.on("chat message",(msg)=>{
-
-    })
 })
 
 const PORT = 5000
