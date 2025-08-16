@@ -7,12 +7,14 @@ function App() {
   const [isConnected , setIsConnected] = useState(false);
   const [messages , setMessages] = useState<string[]>([]);
   const [myMessages , setMyMessages] = useState<string[]>([])
+  const [ActiveUsers , setActiveUsers] = useState<string[]>([])
   const [inputs , setInputs] = useState('');
 
   useEffect(()=>{
 
     const onConnection = ()=>{
       setIsConnected(true)
+      socket.emit('active users')
     }
 
     const onDisconect = ()=>{
@@ -26,15 +28,20 @@ function App() {
     const onChatMessage = (message:string)=>{
       setMessages(prev => [...prev , message])
     }
+    const onActiveUsers = (user:{id:string}[])=>{
+       setActiveUsers(user.map(u => u.id))
+    }
     socket.on('connect', onConnection);
-    socket.on('disconect' , onDisconect);
+    socket.on('disconnect' , onDisconect);
     socket.on('chat message' , onChatMessage);
+    socket.on('active users',onActiveUsers);
 
   return () => {
   socket.off('connect', onConnection);
   socket.off('disconnect', onDisconect);
   socket.off('chat message', onChatMessage);
   socket.off('sent msg',onSentMessage)
+  socket.off('active users',onActiveUsers)
 };
 
 
@@ -43,6 +50,8 @@ function App() {
   function sendMessage(){
     socket.emit('chat message', inputs);
   }
+
+  console.log(ActiveUsers)
 
   return (
     <>

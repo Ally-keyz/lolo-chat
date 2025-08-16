@@ -1,4 +1,10 @@
-export type historyModel = {
-    date : string ,
-    message : string
+
+export interface History  {
+    userId: string,
+    message : string,
+    date : string
+}
+
+export interface ActiveUsers {
+    id : string
 }
